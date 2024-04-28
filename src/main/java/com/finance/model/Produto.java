@@ -23,7 +23,7 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cupom_desconto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
 	private Long id;
 
 	private String tipoUnidade;
