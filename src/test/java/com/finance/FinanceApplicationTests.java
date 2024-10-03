@@ -5,11 +5,14 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.finance.controller.AcessoController;
 import com.finance.model.Acesso;
 import com.finance.service.AcessoService;
 
+@Profile("test")
 @SpringBootTest(classes = FinanceApplication.class)
 class FinanceApplicationTests {
 
@@ -17,30 +20,32 @@ class FinanceApplicationTests {
 	private AcessoService acessoServie;
 	@Autowired
 	private AcessoController acessoController;
+	@Autowired
+	private WebApplicationContext webapp;
 
 	@Test
 	@Order(1)
 	void testCadastraAcesso() {
 		var acesso = new Acesso(null, "ROLE_ADMIN");
 		acesso = acessoServie.save(acesso);
-		
+
 		Assertions.assertNotNull(acesso.getId());
 	}
-	
+
 	@Test
 	@Order(2)
 	void testCadastraAcessoController() {
 		var acesso = new Acesso(null, "ROLE_ADMIN");
 		acesso = acessoController.salvarAcesso(acesso).getBody();
-		
+
 		Assertions.assertEquals("ROLE_ADMIN", acesso.getDescricao());
 	}
-	
+
 	@Test
 	@Order(3)
 	void testDeletarAcessoController() {
 		var acesso = new Acesso(null, "ROLE_ADMIN");
-		acessoController.deletarAcesso(acesso);		
+		acessoController.deletarAcesso(acesso);
 	}
 
 }
