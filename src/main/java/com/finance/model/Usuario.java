@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,6 +41,7 @@ public class Usuario implements UserDetails {
 	private Long id;
 
 	private String login;
+	@Column(nullable = false, unique = true)
 	private String senha;
 	@Temporal(TemporalType.DATE)
 	private Date dataAtualSenha;
@@ -52,6 +54,10 @@ public class Usuario implements UserDetails {
 	@JoinTable(name = "usuario_acesso", uniqueConstraints = @UniqueConstraint(columnNames = { "usuario_id",
 			"acesso_id" }, name = "unique_acesso_user"), joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", unique = false, foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)), inverseJoinColumns = @JoinColumn(name = "acesso_id", unique = false, referencedColumnName = "id", table = "acesso", foreignKey = @ForeignKey(name = "acesso_fk", value = ConstraintMode.CONSTRAINT)))
 	private List<Acesso> acessos;
+	
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+	private Pessoa empresa;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

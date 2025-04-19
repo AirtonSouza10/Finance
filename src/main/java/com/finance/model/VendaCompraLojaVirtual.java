@@ -66,5 +66,9 @@ public class VendaCompraLojaVirtual implements Serializable {
 	private Date dataVenda;
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrega;
+	
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_fk"))
+	private Pessoa empresa;
 
 }
