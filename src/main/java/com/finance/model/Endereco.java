@@ -18,12 +18,16 @@ import javax.persistence.Table;
 import com.finance.enums.TipoEndereco;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "endereco")
 @AllArgsConstructor
 @Data
+@NoArgsConstructor
+@Builder
 @SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco", allocationSize = 1, initialValue = 1)
 public class Endereco implements Serializable {
 

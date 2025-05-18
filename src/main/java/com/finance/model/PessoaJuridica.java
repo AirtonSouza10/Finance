@@ -5,9 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "pessoa_juridica")
 @PrimaryKeyJoinColumn(name = "id")
+@Data
+@NoArgsConstructor
 public class PessoaJuridica extends Pessoa{
 
 	private static final long serialVersionUID = 1L;

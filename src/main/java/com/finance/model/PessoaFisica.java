@@ -9,7 +9,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "id")
 public class PessoaFisica extends Pessoa{
